@@ -1,0 +1,14 @@
+body, p, ul{
+    padding: 0;
+    margin: 0;
+}
+ul, ol{
+    list-style: none;
+}
+body, input, textarea, select{
+    font: 12px/1.15 normal "Microsoft YaHei";
+}
+.container{
+    max-width: 1024px;
+    margin: 0 auto;
+}
