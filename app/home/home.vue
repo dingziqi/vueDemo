@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="container">
-            <a href="http://localhost:8080/" class="logo">PaTica</a>
+            <a href="http://localhost:8080/" class="logo">Vue</a>
             <my-nav :resource="navList"></my-nav>
         </div>
     </header>
@@ -13,23 +13,17 @@
         el: '#app',
         data: {
             navList: [
-                {name: '首页'},
+                {name: 'home'},
                 {
-                    name: '维修服务',
-                    child: [
-                        {name: '手机维修'},
-                        {name: 'pad维修'}
-                    ]
+                    name: 'demo'
                 },
-                {name: '特色服务'},
-                {name: '公司简介'},
-                {name: '联系我们'}
+                {name: 'about'}
             ],
             imgList: [
-                {src: '/img/PC.jpg'},
-                {src: '/img/PC2.jpg'},
-                {src: '/img/PC3.jpg'},
-                {src: '/img/PC4.jpg'}
+                {src: '/img/bg1.png'},
+                {src: '/img/bg2.png'},
+                {src: '/img/bg3.png'},
+                {src: '/img/bg4.png'}
             ]
         },
         components: {
