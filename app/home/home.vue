@@ -1,10 +1,12 @@
 <template>
     <header>
         <div class="container">
-            <span class="logo">PaTica</span>
-            <my-nav :source="navList"></my-nav>
+            <a href="http://localhost:8080/" class="logo">PaTica</a>
+            <my-nav :resource="navList"></my-nav>
         </div>
     </header>
+    <slider :resource="imgList"></slider>
+    <my-footer></my-footer>
 </template>
 <script>
     module.exports = {
@@ -22,11 +24,20 @@
                 {name: '特色服务'},
                 {name: '公司简介'},
                 {name: '联系我们'}
+            ],
+            imgList: [
+                {src: '/img/PC.jpg'},
+                {src: '/img/PC2.jpg'},
+                {src: '/img/PC3.jpg'},
+                {src: '/img/PC4.jpg'}
             ]
         },
         components: {
-            'my-nav': require('./nav.vue')
-        }
+            'my-nav': require('./nav.vue'),
+            'slider': require('./slider.vue'),
+            'my-footer': require('../common/footer.vue')
+        },
+        replace: false
     }
 </script>
 <style lang="sass">
@@ -40,6 +51,7 @@
             color: #22476c;
             font-weight: bold;
             line-height: 42px;
+            text-decoration: none;
         }
     }
 </style>
