@@ -3,7 +3,7 @@
         <ul class="nav-ul">
             <li v-for="i in resource" @mouseover="toggleChild($index, $event)"
                 @mouseout="toggleChild($index, $event, true)" v-bind:class="{'active': $index == show}">
-                <a href="javascript:">{{i.name}}</a>
+                <a href="javascript:" v-link="{path: i.url}">{{i.name}}</a>
                 <ul class="nav-ul nav-child" v-if="$index == show && i.child" transition="dropdown">
                     <li v-for="i in i.child"><a href="javascript:">{{i.name}}</a></li>
                 </ul>

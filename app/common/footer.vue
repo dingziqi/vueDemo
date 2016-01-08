@@ -1,6 +1,6 @@
 <template>
     <footer class="footer">
-        Copyright All Rights Reserved PaTica © 2015-2018 . 粤ICP备15050263号-2
+        Copyright All Rights Reserved Dingziqi © 2016.
     </footer>
 </template>
 <script>

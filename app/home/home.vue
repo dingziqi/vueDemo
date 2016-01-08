@@ -1,30 +1,39 @@
 <template>
     <header>
         <div class="container">
-            <a href="http://localhost:8080/" class="logo">Vue</a>
+            <a class="logo">Vue</a>
             <my-nav :resource="navList"></my-nav>
         </div>
     </header>
     <slider :resource="imgList"></slider>
     <my-footer></my-footer>
+    <router-view></router-view>
 </template>
 <script>
     module.exports = {
-        el: '#app',
-        data: {
-            navList: [
-                {name: 'home'},
-                {
-                    name: 'demo'
-                },
-                {name: 'about'}
-            ],
-            imgList: [
-                {src: '/img/bg1.png'},
-                {src: '/img/bg2.png'},
-                {src: '/img/bg3.png'},
-                {src: '/img/bg4.png'}
-            ]
+//        el: '#app',
+        data: function(){
+            return {
+                navList: [
+                    {
+                        name: 'home',
+                        url: '/'
+                    },
+                    {
+                        name: 'demo'
+                    },
+                    {
+                        name: 'about',
+                        url: '/about'
+                    }
+                ],
+                imgList: [
+                    {src: '/img/bg1.png'},
+                    {src: '/img/bg2.png'},
+                    {src: '/img/bg3.png'},
+                    {src: '/img/bg4.png'}
+                ]
+            }
         },
         components: {
             'my-nav': require('./nav.vue'),
