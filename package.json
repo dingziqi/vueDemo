@@ -1,0 +1,23 @@
+{
+  "name": "wheel-lab",
+  "version": "1.0.0",
+  "description": "make some wheel for practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "poster_swipper": "./node_modules/browser-sync/bin/browser-sync.js start --s -f 'poster_swipper' --start-path './poster_swipper'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dingziqi/wheel-lab.git"
+  },
+  "author": "dingziqi<dingziqi_xtu@sina.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dingziqi/wheel-lab/issues"
+  },
+  "homepage": "https://github.com/dingziqi/wheel-lab#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.12"
+  }
+}
