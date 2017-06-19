@@ -1,10 +1,9 @@
 (function(){
     var scrollLeft = 0;
     var leftX = 0; // 未执行完动画宽度
-    var offset = 0;
     var count = 0;
-    var animateId;
-    var current = 2;
+    var animateStack = [];
+    var current = 0;
     var h = 120, w = 80, g = 15;
 
     var canvas = document.getElementById('canvas');
@@ -34,24 +33,33 @@
         })
 
         canvas.addEventListener('touchmove', function(e){
+            e.preventDefault();
+
             animateId = Date.now();
             var step = e.touches[0].clientX - x;
             // render2(current, 5, leftX + step, animateId);
-            console.log(step);
+
             scrollLeft += step;
-            console.log('scrollLeft:', scrollLeft);
-            drawListNew(5, 0, scrollLeft);
+            if(scrollLeft > 0){
+                scrollLeft = 0;
+            }
+            if(scrollLeft < -(84 * 5 + 16 - 60)){
+                scrollLeft = -(84 * 5 + 16 - 60);
+            }
+            drawListNew(5, current, scrollLeft);
+            if(step)
+            animateStack.push()
+            animateId = requestAnimationFrame(drawListNew.bind(this, 5, current, scrollLeft))
 
             x = e.touches[0].clientX;
             y = e.touches[0].clientY;
-            e.preventDefault();
         })
 
         canvas.addEventListener('touchend', function(){
             x = y = 0;
         })
 
-        drawListNew(5, 0, 2, scrollLeft);
+        drawListNew(5, 0, scrollLeft);
 
         // render(2, 5, 1);
 
@@ -140,6 +148,20 @@
         }
     }
 
+    function renderNew(step){
+        var stamp = 0.2 / 18;
+
+        function animate(){
+            if(count > 18){
+                return;
+            }
+
+            // drawListNew(5, current, )
+            count++;
+            requestAnimationFrame(animate);
+        }
+    }
+
     function drawListNew(len, pre, scrollLeft){
         // 清除上一帧
         let maxWidth = len * 84 + 16;
@@ -147,36 +169,40 @@
 
 
         var next = -1;
-        var lastCenter = 20 * (pre + 1) + 64 * pre + 40;
-        var halfWindow = 375/2;
-        // if(scrollLeft >= lastCenter){
-        //     next = Math.floor((scrollLeft-lastCenter-halfWindow)/84);
-        // } else{
-        //    next = Math.floor(scrollLeft-halfWindow/84);
-        // }
+        var lastCenter = 20 * (pre + 1) + 64 * pre;
+        next = -Math.floor((scrollLeft)/84);
+        console.log(pre);
+
+        var transitionStep = -(scrollLeft + (next - 1) * 84)/84; // 转换过程偏移量
+        console.log('pre: ', pre);
+        console.log('transitionStep: ', transitionStep);
 
         var i = -1;
-        var offset = 375/2 - 60;
+        var offset = 375/2 - 40 + scrollLeft;
         while(i++ <= len){
             // 绘制激活项之前部分
             if(i <= next){
-                if(i === next){
-                    ctx.drawImage(drawItem(1), 20 * (i + 1) + 64 * i + scrollLeft + offset, 40, w, h);
-                    continue;
-                }
                 if(i === pre){
-                    ctx.drawImage(drawItem(1), 20 * (i + 1) + 64 * i + scrollLeft + offset, 40, w, h);
+                    ctx.drawImage(drawItem(1 - transitionStep * 0.2), 20 * i + 64 * i + offset, 40 + 24 * transitionStep, w, h);
                     continue;
                 }
-                ctx.drawImage(drawItem(0.8), 20 * (i + 1) + 64 * i + scrollLeft + offset, 64, w, h);
+                if(i === next){
+                    ctx.drawImage(drawItem(0.8 + transitionStep * 0.2), 20 * i + 16 * (1- transitionStep)  + 64 * i + offset, 64 - 24 * transitionStep, w, h);
+                    continue;
+                }
+                ctx.drawImage(drawItem(0.8), 20 * i + 64 * i + offset, 64, w, h);
             } else{
                 if(i === pre){
-                    ctx.drawImage(drawItem(1), 20 * (i + 1) + 64 * i + scrollLeft + offset, 40, w, h);
+                    ctx.drawImage(drawItem(1 - transitionStep * 0.2), 20 * i + 64 * i + offset, 40, w, h);
                     continue;
                 }
-                ctx.drawImage(drawItem(0.8), 20 * (i + 1) + 64 * i + scrollLeft + offset + 16, 64, w, h);
+                ctx.drawImage(drawItem(0.8), 20 * i + 64 * i + offset + 16, 64, w, h);
             }
         }
+        console.log('scrollLeft: ', scrollLeft);
+        console.log('next: ', next);
+        current = Math.floor(-scrollLeft/84);
+        console.log('current: ', current);
     }
 
     function drawList2(last, len, count, step){
