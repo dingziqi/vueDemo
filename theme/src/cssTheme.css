@@ -1,0 +1,7 @@
+@import "./cssTheme.light.css";
+@import "./cssTheme.dark.css";
+
+:root {
+  --color-main: #f00;
+}
+
